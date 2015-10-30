@@ -1,0 +1,1 @@
+web: env LEIN_NO_DEV=true java $JVM_OPTS -jar {{name}}-standalone.jar
