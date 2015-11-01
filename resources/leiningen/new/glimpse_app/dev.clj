@@ -17,13 +17,16 @@
 (def application (wrap-defaults (routes {{name}}-routes app-routes)
                                 site-defaults))
 
-(defn start-server []
-  (if-not (nil? @server)
-    (println (str "Could not start server; already started.  "
-                  "Maybe you want to (restart-server)?"))
-    (reset! server (serve application {:join? false
-                                       :open-browser? true})))
-  nil)
+(defn start-server
+  ([] (start-server true))
+  ([open-browser?]
+   (if-not (nil? @server)
+     (println (str "Could not start server; already started.  "
+                   "Maybe you want to (restart-server)?"))
+     (reset! server (serve application {:join? false
+                                        :open-browser? open-browser?
+                                        :auto-refresh? true})))
+   nil))
 
 (defn stop-server []
   (let [svr @server]
@@ -35,6 +38,7 @@
 (defn restart-server []
   (when-not (nil? @server)
     (stop-server))
+  (require '{{name}}.dev :reload-all)
   (start-server))
 
 (defn -main [& [mode]]
