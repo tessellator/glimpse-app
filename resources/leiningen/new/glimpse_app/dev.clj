@@ -1,21 +1,10 @@
 (ns {{name}}.dev
-  (:require [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
-            [ring.server.standalone :refer [serve]]
-            [compojure.core :refer [defroutes routes ANY]]
-            [compojure.route :as route]
+  (:require [ring.server.standalone :refer [serve]]
             [glimpse.views :as glimpse]
-            [{{name}}.routes :refer [{{name}}-routes]]))
+            [{{name}}.routes :refer [{{name}}-routes]]
+            [{{name}}.web :refer [application]]))
 
 (defonce server (atom nil))
-
-(defroutes app-routes
-  (route/resources "/")
-  (ANY "*" [:as {uri :uri}] (when-let [resp (glimpse/not-found uri)]
-                              (glimpse/render resp)))
-  (route/not-found "Not Found"))
-
-(def application (wrap-defaults (routes {{name}}-routes app-routes)
-                                site-defaults))
 
 (defn start-server
   ([] (start-server true))
