@@ -28,7 +28,7 @@
   (when-not (nil? @server)
     (stop-server))
   (require '{{name}}.dev :reload-all)
-  (start-server))
+  (start-server false))
 
 (defn -main [& [mode]]
   (when-not (nil? mode)
