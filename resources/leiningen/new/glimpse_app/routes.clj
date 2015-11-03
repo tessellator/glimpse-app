@@ -3,5 +3,6 @@
               [glimpse.views :as glimpse]))
 
 (defroutes {{name}}-routes
-  (GET "/" request (-> (glimpse/view (:uri request))
-                       (glimpse/render))))
+  ;; Here is where you add your application routes, e.g.:
+  ;; (GET "/" [] (glimpse/render (glimpse/view "/")))
+)
