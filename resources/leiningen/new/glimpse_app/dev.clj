@@ -1,7 +1,6 @@
 (ns {{name}}.dev
   (:require [ring.server.standalone :refer [serve]]
             [glimpse.views :as glimpse]
-            [{{name}}.routes :refer [{{name}}-routes]]
             [{{name}}.web :refer [application]]))
 
 (defonce server (atom nil))
